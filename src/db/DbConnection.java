@@ -30,4 +30,8 @@ public class DbConnection {
             throwables.printStackTrace();
         }
     }
+
+    public static void main(String[] args) {
+
+    }
 }

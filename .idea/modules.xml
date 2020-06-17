@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/logmanange.iml" filepath="$PROJECT_DIR$/logmanange.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/logmanange.iml" filepath="$PROJECT_DIR$/.idea/logmanange.iml" />
     </modules>
   </component>
 </project>
