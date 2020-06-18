@@ -8,9 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>添加日志</title>
 </head>
 <body>
-
+<form action="addlog" method="post" onsubmit="return check(this)">
+    <input type="text" name="title" placeholder="请输入标题"><br>
+    <br>
+    <textarea cols="50" rows="20" name="content"></textarea>
+    <input type="submit" value="提交">
+</form>
 </body>
+<script>
+    function check(f) {
+        return f.title.value !== "" && f.context.value !== "";
+    }
+</script>
 </html>

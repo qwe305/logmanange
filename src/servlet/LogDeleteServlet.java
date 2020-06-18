@@ -13,17 +13,25 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "LogListServlet")
-public class LogListServlet extends HttpServlet {
+@WebServlet(name = "LogDeleteServlet")
+public class LogDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LogDao logDao = new LogDaoImpl();
+        int id = Integer.parseInt(request.getParameter("id"));
         HttpSession session = request.getSession();
-        List<Log> logList = logDao.getLogListByUsername((String) session.getAttribute("user"));
-        request.setAttribute("logList",logList);
+        LogDao logDao = new LogDaoImpl();
+        logDao.deleteLogById(id);
+        String userid=request.getParameter("uid");
+        if(userid==null||"".equals(userid)){
+            List<Log> logList = logDao.getLogListByUsername((String) session.getAttribute("user"));
+            request.setAttribute("logList",logList);
+        }else{
+            List<Log> logList = logDao.getLogListByUserId(Integer.parseInt(userid));
+            request.setAttribute("logList",logList);
+        }
         request.getRequestDispatcher("loglist.jsp").forward(request,response);
     }
 }

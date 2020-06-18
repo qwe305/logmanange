@@ -12,16 +12,15 @@
 %>
 <html>
 <head>
-    <base href="<%=basePath%>">
     <title>Title</title>
 </head>
 <body>
 <h1>登录界面</h1>
-<form id="myform" action="<%=basePath%>/index.jsp" method="post">
+<form id="myform" action="register" method="post">
     用户名：<input type="text" name="username" id="username">
     密码：<input type="password" name="password" id="password">
-    重复密码：<input type="password" name="repassword" id="repassword">
-    <input type="submit" value="注册" id="submit" name="submit"  >
+    重复密码：<input type="password" id="repassword">
+    <input type="submit" value="注册" id="submit">
     <p id="message"></p>
 </form>
 </body>

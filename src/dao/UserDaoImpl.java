@@ -11,20 +11,15 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao{
 
-    DbConnection dbConnection=new DbConnection();
 
     @Override
     public void register(User user) {
-        String sql="insert into user (username,password,register_date,role) values(?,?,?,?)";
-
+        DbConnection dbConnection=new DbConnection();
+        String sql="insert into user (username,password,register_date,role) values(?,?,now(),2)";
         try {
             PreparedStatement pstmt=dbConnection.getCon().prepareStatement(sql);
-
             pstmt.setString(1,user.getUsername());
             pstmt.setString(2,user.getPassword());
-            pstmt.setString(3,user.getRegister_date());
-            pstmt.setInt(4,2);
-
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -37,28 +32,29 @@ public class UserDaoImpl implements UserDao{
      * @return 1 管理员 2 普通用户 0 登陆失败
      */
     @Override
-    public int checkLogin(User user) {
-
-        int flag=0;
+    public User checkLogin(User user) {
+        DbConnection dbConnection=new DbConnection();
 
         String sql ="select * from user where username = '"+user.getUsername()+"'";
-
+        User res = null;
         ResultSet rs= dbConnection.executeQuery(sql);
         try {
-            while (rs.next()){
-                flag=rs.getInt("role");
+            if(rs.next()){
+                res = new User();
+                res.setUsername(user.getUsername());
+                res.setId(rs.getInt("id"));
+                res.setRole(rs.getInt("role"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return flag;
+        return res;
     }
 
     @Override
     public void updatePassword(User user) {
-
-        String sql="update user set password where id = '"+user.getId()+"'";
+        DbConnection dbConnection=new DbConnection();
+        String sql="update user set password = ? where id = '"+user.getId()+"'";
 
         try {
             PreparedStatement pstmt=dbConnection.getCon().prepareStatement(sql);
@@ -79,7 +75,7 @@ public class UserDaoImpl implements UserDao{
      */
     @Override
     public List<User> getUserList() {
-
+        DbConnection dbConnection=new DbConnection();
         List<User> userList=new LinkedList<User>();
 
         String sql ="select * from user where role = 2";
@@ -88,7 +84,7 @@ public class UserDaoImpl implements UserDao{
         try {
             while (rs.next()){
                 User user=new User();
-
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setRegister_date(rs.getString("register_date"));
@@ -110,14 +106,14 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> getUserByName(String name) {
         List<User> userList=new LinkedList<User>();
-
-        String sql ="select * from user where role = 2 and username = '"+name+"'";
+        DbConnection dbConnection=new DbConnection();
+        String sql ="select * from user where role = 2 and username like '%"+name+"%'";
 
         ResultSet rs= dbConnection.executeQuery(sql);
         try {
             while (rs.next()){
                 User user=new User();
-
+                user.setId(rs.getInt("id"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setRegister_date(rs.getString("register_date"));
@@ -134,7 +130,7 @@ public class UserDaoImpl implements UserDao{
     @Override
     public void deleteUserById(Integer id) {
         String sql="delete from user where id = '"+id+"'";
-
+        DbConnection dbConnection=new DbConnection();
         try {
             PreparedStatement pstmt=dbConnection.getCon().prepareStatement(sql);
 

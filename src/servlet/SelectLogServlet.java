@@ -9,21 +9,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "LogListServlet")
-public class LogListServlet extends HttpServlet {
+@WebServlet(name = "SelectLogServlet")
+public class SelectLogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         LogDao logDao = new LogDaoImpl();
-        HttpSession session = request.getSession();
-        List<Log> logList = logDao.getLogListByUsername((String) session.getAttribute("user"));
-        request.setAttribute("logList",logList);
-        request.getRequestDispatcher("loglist.jsp").forward(request,response);
+        Log log = logDao.getLogById(id);
+        request.setAttribute("log",log);
+        request.getRequestDispatcher("updatelog.jsp").forward(request,response);
     }
 }

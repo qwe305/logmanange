@@ -21,11 +21,12 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession();
         user.setUsername(request.getParameter("username"));
         user.setPassword(request.getParameter("password"));
-        int res = userDao.checkLogin(user);
-        if(res!=0){
+        User res = userDao.checkLogin(user);
+        if(res!=null){
             session.setAttribute("user",user.getUsername());
-            session.setAttribute("role",res);
-            if(res==1){
+            session.setAttribute("role",res.getRole());
+            session.setAttribute("id",res.getId());
+            if(res.getRole()==1){
                 response.sendRedirect("userlist");
             }else{
                 response.sendRedirect("loglist");

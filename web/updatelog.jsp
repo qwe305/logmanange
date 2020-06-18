@@ -15,11 +15,17 @@
     <title>Title</title>
 </head>
 <body>
-<form id="myform" action="/login" method="post">
-    日志标题：<input type="text" name="title" id="title">
-    日志内容：<input type="text" name="content" id="content">
-    <input type="submit" value="修改" id="update" name="update" >
-    <p id="message"></p>
+<form id="myform" action="updatelog" method="post" onsubmit="return check(this)">
+    <input name="id" value="${log.id}" type="hidden">
+    <input type="text" name="title" placeholder="请输入标题" value="${log.title}"><br>
+    <br>
+    <textarea cols="50" rows="20" name="content">${log.content}</textarea>
+    <input type="submit" value="提交">
 </form>
 </body>
+<script>
+    function check(f) {
+        return f.title.value !== "" && f.context.value !== "";
+    }
+</script>
 </html>

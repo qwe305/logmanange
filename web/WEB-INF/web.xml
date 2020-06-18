@@ -11,6 +11,99 @@
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>logList</servlet-name>
+        <servlet-class>servlet.LogListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logList</servlet-name>
+        <url-pattern>/loglist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>userlist</servlet-name>
+        <servlet-class>servlet.UserListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userlist</servlet-name>
+        <url-pattern>/userlist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>register</servlet-name>
+        <servlet-class>servlet.RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>addlog</servlet-name>
+        <servlet-class>servlet.AddLogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addlog</servlet-name>
+        <url-pattern>/addlog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>userloglist</servlet-name>
+        <servlet-class>servlet.UserLogListServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>userloglist</servlet-name>
+        <url-pattern>/userloglist</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>logdelete</servlet-name>
+        <servlet-class>servlet.LogDeleteServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logdelete</servlet-name>
+        <url-pattern>/logdelete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>selectlog</servlet-name>
+        <servlet-class>servlet.SelectLogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectlog</servlet-name>
+        <url-pattern>/selectlog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updatelog</servlet-name>
+        <servlet-class>servlet.UpdateLogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updatelog</servlet-name>
+        <url-pattern>/updatelog</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>selectuserlikename</servlet-name>
+        <servlet-class>servlet.SelectUserLikeNameServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>selectuserlikename</servlet-name>
+        <url-pattern>/selectuserlike</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>logselectbylike</servlet-name>
+        <servlet-class>servlet.LogSelectByLikeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logselectbylike</servlet-name>
+        <url-pattern>/logselectbylike</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>updatepassword</servlet-name>
+        <servlet-class>servlet.UpdatePasswordServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>updatepassword</servlet-name>
+        <url-pattern>/updatepassword</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
 
 
 
@@ -29,5 +122,13 @@
     <filter-mapping>
         <filter-name>roleFilter</filter-name>
         <url-pattern>/userlist</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>CharacterEncoding</filter-name>
+        <filter-class>filter.CharacterEncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncoding</filter-name>
+        <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>

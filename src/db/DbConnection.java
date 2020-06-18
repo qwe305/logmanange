@@ -5,7 +5,7 @@ import java.sql.*;
 public class DbConnection {
     private static Connection con = null;
     private final String user = "root";
-    private final String password = "123456";
+    private final String password = "QWER1234";
 
     public Connection getCon() {
         try {

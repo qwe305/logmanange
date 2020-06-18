@@ -14,4 +14,8 @@ public interface LogDao {
     void updateLog(Log log);
 
     void deleteLogById(Integer id);
+
+    Log getLogById(Integer id);
+
+    List<Log> getLogListByUsername(String username);
 }

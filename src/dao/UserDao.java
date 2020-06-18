@@ -8,7 +8,7 @@ public interface UserDao {
 
     void register(User user);
 
-    int checkLogin(User user);
+    User checkLogin(User user);
 
     void updatePassword(User user);
 

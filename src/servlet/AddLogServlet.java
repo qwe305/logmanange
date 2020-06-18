@@ -11,19 +11,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet(name = "LogListServlet")
-public class LogListServlet extends HttpServlet {
+@WebServlet(name = "AddLogServlet")
+public class AddLogServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        String title = request.getParameter("title");
+        String content = request.getParameter("content");
+        HttpSession session = request.getSession();
+        Log log = new Log();
+        log.setTitle(title);
+        log.setContent(content);
+        log.setUserId((Integer) session.getAttribute("id"));
+        LogDao logDao = new LogDaoImpl();
+        logDao.addLog(log);
+        response.sendRedirect("loglist");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        LogDao logDao = new LogDaoImpl();
-        HttpSession session = request.getSession();
-        List<Log> logList = logDao.getLogListByUsername((String) session.getAttribute("user"));
-        request.setAttribute("logList",logList);
-        request.getRequestDispatcher("loglist.jsp").forward(request,response);
+        doPost(request, response);
     }
 }
