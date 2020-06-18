@@ -6,39 +6,40 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path;
+%>
 <html>
 <head>
-    <title>登录</title>
-    <style>
-        .login{
-            width: 250px;
-            margin: 100px auto;
-        }
-        .msg{
-            color: red;
-            margin: 10px auto;
-        }
-        input[type=submit]{
-            margin: 0 auto;
-            width: 50px;
-        }
-    </style>
+    <base href="<%=basePath%>">
+    <title>Title</title>
 </head>
 <body>
-    <div class="login">
-        <form method="post" action="login">
-            <label>
-                账号:<input type="text" name="username">
-            </label>
-            <br>
-            <label>
-                密码:<input type="password" name="password">
-            </label>
-            <div class="msg">${msg}</div>
-            <div style="width: 100%;"><input type="submit" value="登录"></div>
-        </form>
-    </div>
-
+<h1>登录界面</h1>
+<form id="myform" action="LoginServlet" method="post">
+    用户名：<input type="text" name="username" id="username">
+    密码：<input type="password" name="password" id="password">
+    <input type="submit" value="登录" id="login" name="login" >
+    <a href="<%=basePath%>/register.jsp">注册</a>
+    <p id="message"></p>
+</form>
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $("#login").click(function() {
+            if ($("#username").val() === "") {
+                $("#username").focus();
+                $("#message").text("账号不能为空");
+                return false;
+            } else if ($("#password").val() === "") {
+                $("#password").focus();
+                $("#message").text("密码不能为空");
+                return false;
+            }
+            return true;
+        })
+    })
+</script>

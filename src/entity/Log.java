@@ -5,6 +5,15 @@ public class Log {
     private String title;
     private String content;
     private String create_date;
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getId() {
         return id;
