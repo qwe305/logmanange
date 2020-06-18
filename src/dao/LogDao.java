@@ -1,4 +1,17 @@
 package dao;
 
-public class LogDao {
+import entity.Log;
+
+import java.util.List;
+
+public interface LogDao {
+    List<Log> getLogListByUserId(Integer id);
+
+    List<Log> getLogListByUserIdAndTitle(Integer id,String title);
+
+    void addLog(Log log);
+
+    void updateLog(Log log);
+
+    void deleteLogById(Integer id);
 }

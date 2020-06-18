@@ -1,8 +1,6 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DbConnection {
     private static Connection con = null;
@@ -16,7 +14,9 @@ public class DbConnection {
             return null;
         }
         try {
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/logmanage?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8");
+            con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/logmanage?" +
+                            "serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8",user,password);
         } catch (SQLException throwables) {
             return null;
         }
@@ -31,7 +31,7 @@ public class DbConnection {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
     }
 }
