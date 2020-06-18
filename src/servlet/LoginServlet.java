@@ -25,8 +25,14 @@ public class LoginServlet extends HttpServlet {
         if(res!=0){
             session.setAttribute("user",user.getUsername());
             session.setAttribute("role",res);
+            if(res==1){
+                response.sendRedirect("userlist");
+            }else{
+                response.sendRedirect("loglist");
+            }
         }else{
-
+            request.setAttribute("msg","账号或密码错误，登录失败");
+            request.getRequestDispatcher("login.jsp").forward(request,response);
         }
     }
 

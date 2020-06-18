@@ -11,4 +11,23 @@
         <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+
+
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>roleFilter</filter-name>
+        <filter-class>filter.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>roleFilter</filter-name>
+        <url-pattern>/userlist</url-pattern>
+    </filter-mapping>
 </web-app>
