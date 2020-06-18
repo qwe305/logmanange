@@ -25,8 +25,9 @@ public class LoginServlet extends HttpServlet {
         if(res!=0){
             session.setAttribute("user",user.getUsername());
             session.setAttribute("role",res);
+            request.getRequestDispatcher("../login.jsp").forward(request,response);
         }else{
-
+            request.getRequestDispatcher("../login.jsp").forward(request,response);
         }
     }
 

@@ -5,7 +5,7 @@ import java.sql.*;
 public class DbConnection {
     private static Connection con = null;
     private final String user = "root";
-    private final String password = "QWER1234";
+    private final String password = "123456";
 
     public Connection getCon() {
         try {
@@ -15,7 +15,7 @@ public class DbConnection {
         }
         try {
             con = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/logmanage?" +
+                    "jdbc:mysql://127.0.0.1:3306/logmanage?" +
                             "serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8",user,password);
         } catch (SQLException throwables) {
             return null;
@@ -23,6 +23,29 @@ public class DbConnection {
         return con;
     }
 
+    //查询结果集
+    public ResultSet executeQuery(String query){
+        ResultSet rs=null;
+
+        try {
+            rs=getCon().createStatement().executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println("executeQuery:"+e);
+        }
+        return rs;
+    }
+
+    //修改数据库
+    public void executeUpdate(String command){
+
+        try {
+            getCon().createStatement().executeUpdate(command);
+        } catch (SQLException e) {
+            System.out.println("executeUpdate:"+e);
+        }
+    }
+
+    //关闭数据库
     public void close() {
         try {
             con.close();
@@ -31,7 +54,4 @@ public class DbConnection {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
-
-    }
 }
